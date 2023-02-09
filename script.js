@@ -7,12 +7,12 @@ const newQouteBtn = document.querySelector('#new-qoute')
 const loader = document.getElementById('loader');
 let data = []
 
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     qouteContainer.hidden = true;
 }
 
-function complete() {
+function removeLoadingSpinner() {
     if (!loader.hidden) {
         loader.hidden = true;
         qouteContainer.hidden = false;
@@ -20,7 +20,7 @@ function complete() {
 }
 
 function newQoute() {
-    loading()
+    showLoadingSpinner()
     const qoute = data[Math.floor(Math.random() * data.length)];
 
     if (!qoute.author) {
@@ -36,10 +36,10 @@ function newQoute() {
     }
 
     qouteText.textContent = qoute.text
-    complete()
+    removeLoadingSpinner()
 }
 async function getQoutes() {
-    loading()
+    showLoadingSpinner()
     const apiUrl = 'https://type.fit/api/quotes'
     try {
         const response = await fetch(apiUrl);
